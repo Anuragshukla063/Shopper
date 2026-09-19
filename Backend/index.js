@@ -1,4 +1,6 @@
-const port = 4000;
+import "dotenv/config";
+const port = process.env.PORT || 4000;
+
 import express from "express";
 const app = express();
 import mongoose from "mongoose";
@@ -13,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 //Databse Connection with mongodb
-mongoose.connect("mongodb://localhost:27017/");
+mongoose.connect(process.env.MONGODB_URI);
 // API creation
 
 app.get("/", (req, res) => {
@@ -37,7 +39,7 @@ app.use("/images", express.static("upload/images"));
 app.post("/upload", upload.single("product"), (req, res) => {
   res.json({
     success: 1,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`,
+    image_url: `${process.env.BACKEND_URL}/images/${req.file.filename}`,
   });
 });
 // Schema for creating products
