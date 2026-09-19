@@ -5,7 +5,9 @@ const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch("http://localhost:4000/allproducts", { cache: "no-store" })
+    await fetch("https://shopper-backend-ozjp.onrender.com/allproducts", {
+      cache: "no-store",
+    })
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data);
@@ -15,7 +17,7 @@ const ListProduct = () => {
     fetchInfo();
   }, []);
   const remove_product = async (id) => {
-    await fetch("http://localhost:4000/removeproducts", {
+    await fetch("https://shopper-backend-ozjp.onrender.com/removeproducts", {
       method: "POST",
       headers: {
         Accept: "application/json",
